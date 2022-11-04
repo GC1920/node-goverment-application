@@ -1,9 +1,12 @@
 const express = require('express');
-const userRoute = require('./routes/user.routes')
-
 const app = express()
+const conectDatabase = require("./database/database");
+
+const userRoute = require('./routes/user.routes');
+
 const port = 3000
 
+conectDatabase()
 app.use(express.json())
 app.use("/user", userRoute)
 
