@@ -1,13 +1,10 @@
 const express = require('express');
+const userRoute = require('./routes/user.routes')
 
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-
-  res.send('Hello World')
-
-})
+app.use("/soma", userRoute)
 
 app.listen(port, () => {
 
