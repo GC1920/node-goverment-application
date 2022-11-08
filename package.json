@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "There's no description partner",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/Index.js",
     "dev": "nodemon src/Index.js"
