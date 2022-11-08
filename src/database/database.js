@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDatabase = () => {
 
-    mongoose.connect("mongodb+srv://root:admin@cluster.r35yfvx.mongodb.net/?retryWrites=true&w=majority", 
+    mongoose.connect( process.env.MONGODB_URI , 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
