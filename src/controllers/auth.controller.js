@@ -1,7 +1,12 @@
 import bcrypt from "bcrypt";
 
-import { loginService } from "../services/auth.service.js";
+import { loginService, generateToken } from "../services/auth.service.js";
 
+/*
+    The auth.controller is for management of the user login, the function below search for the email and
+    password in the database, and generate a random token for the user.
+    
+*/
 const login = async (req, res) => {
 
     const { email, password } = req.body;
@@ -23,8 +28,10 @@ const login = async (req, res) => {
             return res.status(404).send({ message: "User or password not found" });
             
         }
+
+        const token = generateToken(user.id);
     
-        res.send("Login Ok!");
+        res.send({ token });
 
     } catch (err) {
         
