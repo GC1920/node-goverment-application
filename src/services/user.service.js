@@ -19,4 +19,6 @@ const updateService = (
     {name, username, email, password, avatar, background
 });
 
-export default { createService, findAllService, findByIdService, updateService }
+const removeService = (id) => User.deleteOne({ _id: id });
+
+export default { createService, findAllService, findByIdService, updateService, removeService }

@@ -9,5 +9,6 @@ route.post("/", userController.create);
 route.get("/", userController.findAll);
 route.get("/:id", validId, validUser, userController.findById);
 route.patch("/:id", validId, validUser, userController.update);
+route.delete("/:id", validId, userController.remove);
 
 export default route
