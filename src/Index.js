@@ -1,17 +1,23 @@
+//All import lines come here
 import express from "express";
-const app = express()
 import conectDatabase from "./database/database.js";
+import userRoute from "./routes/user.routes.js";
+import authRoute from "./routes/auth.route.js"
 
+//DotEnv config
 import dotenv from "dotenv";
+
 dotenv.config();
 
-import userRoute from "./routes/user.routes.js";
-
+//All significant variables come here
 const port = process.env.PORT || 3000;
+const app = express()
 
+//App uses and relevant conections
 conectDatabase()
-app.use(express.json());
 
+app.use(express.json());
 app.use("/user", userRoute);
+app.use("/auth", authRoute);
 
 app.listen(port, () => console.log(`Servidor rodando em: http://localhost:${port}`))
