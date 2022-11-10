@@ -4,7 +4,7 @@ const create = async (req, res) => {
 
     try {
 
-        const { title, text, banner } = rq.body
+        const { title, text, banner } = req.body
 
         if(!title || !text || !banner) {
 
@@ -16,7 +16,7 @@ const create = async (req, res) => {
             title,
             text,
             banner,
-            id: "ObjectIdFake1"
+            user: { _id: "636a5ea46aa92743e715ce8e" }
         });
         
         res.send(201);
@@ -30,9 +30,22 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
 
-    const news = []
-    res.send(news)
+    try {
+
+        const news = await findAllService();
+
+        if(news.length === 0) {
+
+            return res.status(400).send({ message: "There are no registered news" });
+        }
+
+        res.send(news);
+        
+    } catch (err) {
+        
+        res.status(500).send({ message: err.message });
+    }
 
 };
 
-export default { create, findAll }
+export { create, findAll }
