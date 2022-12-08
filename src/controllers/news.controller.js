@@ -46,13 +46,13 @@ const findAll = async (req, res) => {
         
         const news = await findAllService(offset, limit);
         const total = await countNewsService()
-        const currentUrl = req.baseurl
+        const currentUrl = req.baseUrl;
 
         const next = offset + limit;
         const nextUrl = next < total ? `${currentUrl}?limit=${limit}&offset=${next}` : null;
 
         const previous = offset - limit < 0 ? null : offset - limit;
-        const previousUrl = previus != null ? `${currentUrl}?limit=${limit}&offset=${previous}` : null;
+        const previousUrl = previous != null ? `${currentUrl}?limit=${limit}&offset=${previous}` : null;
 
         if(news.length === 0) {
 
@@ -73,7 +73,8 @@ const findAll = async (req, res) => {
                 banner: item.banner,
                 likes: item.likes,
                 comments: item.comments,
-                userName: item.user.name,
+                name: item.user.name,
+                username: item.user.username,
                 userAvatar: item.user.avatar
             }))
         });
