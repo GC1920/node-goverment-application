@@ -1,4 +1,4 @@
-import { createService, findAllService, countNewsService, topNewsService, findByIdService, searchByTitleService, byUserService, updateService } from "../services/news.service.js";
+import { createService, findAllService, countNewsService, topNewsService, findByIdService, searchByTitleService, byUserService, updateService, eraseService } from "../services/news.service.js";
 
 export const create = async (req, res) => {
 
@@ -232,6 +232,30 @@ export const updateNews = async (req, res) => {
         await updateService(id, title, text, banner);
 
         return res.send({ message: "Post sucessfuly updated!" });
+        
+    } catch (err) {
+        
+        res.status(500).send({ message: err.message });
+    }
+};
+
+export const eraseNews = async (req, res) => {
+
+    try {
+
+        const { id } = req.params;
+
+        const news = await findByIdService(id);
+
+        if (news.user.id != req.userId) {
+
+            res.status(400).send({ message: "You can't delete this post." });
+
+        }
+        
+        await eraseService(id);
+
+        return res.send({ message: "Post deleted sucesfully" });
         
     } catch (err) {
         
